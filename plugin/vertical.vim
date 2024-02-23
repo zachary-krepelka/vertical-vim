@@ -3,6 +3,7 @@
 " DATE: Thursday, February 22nd, 2024
 " ABOUT: Vertical motions for the Vim text editor
 " ORIGIN: https://github.com/zachary-krepelka/vertical-vim.git
+" UPDATED: Friday, February 23rd, 2024 at 6:05 PM
 
 " Variables  {{{1
 
@@ -33,7 +34,7 @@ function! s:find(target, clusivity, direction, visual, update)
 	" Bug here. Need to account for previous visual selection anchor.
 
 	if a:visual
-		let start = getpos('.')[1:2]
+		let start = [line('.'), virtcol('.')]
 	endif
 
 	for i in range(v:count1 + l:nudge)
@@ -45,8 +46,8 @@ function! s:find(target, clusivity, direction, visual, update)
 	endif
 
 	if a:visual
-		let end = getpos('.')[1:2]
-		call s:block(start[0], start[1], end[0], end[1])
+		let end = [line('.'), virtcol('.')]
+		call call('s:block', l:start + l:end)
 	endif
 
 endfunction
@@ -94,7 +95,7 @@ function s:block(x1, y1, x2, y2)
 
 	let p2 = a:x2 .. 'G' .. a:y2 .. '|'
 
-	exe 'norm' l:p1 .. "\<C-V>" .. l:p2
+	exe 'norm' l:p1 .. "\<C-Q>" .. l:p2
 
 endfunction
 
