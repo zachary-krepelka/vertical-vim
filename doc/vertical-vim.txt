@@ -31,18 +31,18 @@ This plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
 Background~
 
 The Vim text editor provides a set of commands called |motions|, so called
-because they move the cursor's position on the screen. More generally, motions
-act over text when provided with an |operator|, and they may be supplied with a
-|count| to repeat the action a specified number of times.
+because they move the cursor's position on the screen.  An |operator| applies an
+action to the text moved over by a motion.  Either may be given a |count| to
+enact their functionality a specified number of times.
 
 A subset of these motions pertain to moving the cursor either left or right
-within the current line. Of these, I am specifically interested in the
-following. |f| |F| |t| |T| |;| |,|
+within the current line.  Of these, I am specifically interested in the
+following.  |f| |F| |t| |T| |;| |,|
 
 	- The |f|ind command takes a character and moves the cursor to the next
 	  occurrence of that character in the current line.  Its counterpart |F|
-	  takes a character and moves the cursor to previous occurrence of that
-	  character in the current line. >
+	  takes a character and moves the cursor to the previous occurrence of
+	  that character in the current line. >
 
                 before  fR
                 |
@@ -67,7 +67,7 @@ following. |f| |F| |t| |T| |;| |,|
 			 after  tR
 <
 
-	- The command |;| repeats latest |f|, |t|, |F| or |T|. Its counterpart
+	- The command |;| repeats latest |f|, |t|, |F| or |T|.  Its counterpart
 	  command |,| applies |;| in the opposite direction. >
 
 		  start here                   fw
@@ -79,15 +79,15 @@ following. |f| |F| |t| |T| |;| |,|
 		  						 ;        ;
 <
 	These commands let you flow through a line with ease once you have
-	established a target. They feel quite natural once you get into the
+	established a target.  They feel quite natural once you get into the
 	habit of using them.  Observe that |;| and |,| have a direction of flow
 	dependent upon the last issued |f|, |t|, |F|, or |T|.
 
 Plugin Functionality ~
 
-This plugin provides a variation of the commands previously discussed. By
+This plugin provides a variation of the commands previously discussed.  By
 prefixing any of the aforementioned motions with a space, the motion will take
-effect in the current column as apposed to in the current line. In effect, this
+effect in the current column as apposed to the current line.  In effect, this
 plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
 
 Maybe down the road, should the need arise, I'll program more vertical motions.
@@ -101,26 +101,27 @@ This plugin provides six motions.  Operators and counts work as expected.
 <Space>f{char}
 
 			A motion that moves the cursor to the next occurrence of
-			{char} in the cursor's current column. The cursor will
+			{char} in the cursor's current column.  The cursor will
 			move down the screen should a match exist.
 
 <Space>F{char}
 
 			A motion that moves the cursor to the previous
-			occurrence of {char} in the cursor's current column. The
-			cursor will move up the screen should a match exist.
+			occurrence of {char} in the cursor's current column.
+			The cursor will move up the screen should a match exist.
 
 <Space>t{char}
 
 			A motion that moves the cursor just before the next
-			occurrence of {char} in the cursor's current column. The
-			cursor will move down the screen should a match exist.
+			occurrence of {char} in the cursor's current column.
+			The cursor will move down the screen should a match
+			exist.
 
 <Space>T{char}
 
 			A motion that moves the cursor just after the previous
-			occurrence of {char} in the cursor's current column. The
-			cursor will move up the screen should a match exist.
+			occurrence of {char} in the cursor's current column.
+			The cursor will move up the screen should a match exist.
 
 <Space>;
 
@@ -134,11 +135,11 @@ This plugin provides six motions.  Operators and counts work as expected.
 
 EXAMPLES          3                                 *vertical-vim-examples* {{{1
 
-The following exercises will give you a good feel for this plugin. Below is an
-ASCII art representation of a chess board. I will use this to demonstrate my
-plugin's functionality. You may want to copy it into a new buffer to practice
-with.  1) Place your cursor on the image and copy it with |yip|. 2) Open up a
-new window with |:vnew|. 3) Paste the image with |p|. >
+The following exercises will give you a good feel for this plugin.  Below is an
+ASCII art representation of a chess board.  I will use this to demonstrate my
+plugin's functionality.  You may want to copy it into a new buffer to practice
+with.  1) Place your cursor on the image and copy it with |yip|.  2) Open up a
+new window with |:vnew|.  3) Paste the image with |p|. >
 
 	   _______________
 	8 |_|#|_|#|_|#|_|#|
@@ -153,7 +154,7 @@ new window with |:vnew|. 3) Paste the image with |p|. >
 
 Basic Movement~
 
-Move your cursor to cell A8. Place a mark for convenience.
+Move your cursor to cell A8.  Place a mark for convenience.
 
 	* In vanilla Vim, you would type `f#` in normal mode to move to cell B8.
 
@@ -200,7 +201,7 @@ following examples with different counts.  Undo is your friend.
 
 	* `y<Space>f{char}` to yank vertically.
 
-	* `c<Space>f{char}changed<Enter>` to change vertically.
+	* `c<Space>f{char}changed<Esc>` to change vertically.
 
 	* `d<Space>f{char}` to delete vertically.
 
