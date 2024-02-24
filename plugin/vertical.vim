@@ -3,7 +3,7 @@
 " DATE: Thursday, February 22nd, 2024
 " ABOUT: Vertical motions for the Vim text editor
 " ORIGIN: https://github.com/zachary-krepelka/vertical-vim.git
-" UPDATED: Friday, February 23rd, 2024 at 6:05 PM
+" UPDATED: Saturday, February 24th, 2024 at 1:10 AM
 
 " Variables  {{{1
 
@@ -118,3 +118,11 @@ vnoremap <silent> <Space>f :<C-U>call <SID>find(getcharstr(), 0, 0, 1, 1)<CR>
 vnoremap <silent> <Space>F :<C-U>call <SID>find(getcharstr(), 0, 1, 1, 1)<CR>
 vnoremap <silent> <Space>t :<C-U>call <SID>find(getcharstr(), 1, 0, 1, 1)<CR>
 vnoremap <silent> <Space>T :<C-U>call <SID>find(getcharstr(), 1, 1, 1, 1)<CR>
+
+" Menus {{{1
+
+if has("gui_running") && has("menu") && &go =~# 'm'
+
+	amenu <silent> &Plugin.Vertical\ Vim.&Help :tab help vertical-vim<CR>
+
+endif
