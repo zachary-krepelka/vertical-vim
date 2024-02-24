@@ -1,0 +1,227 @@
+*vertical-vim.txt*	Vertical motions for the Vim text editor
+*vertical-vim*
+
+ __   __       _   _         _  __   ___        ~
+ \ \ / /__ _ _| |_(_)__ __ _| | \ \ / (_)_ __   ~
+  \ V / -_) '_|  _| / _/ _` | |  \ V /| | '  \  ~
+   \_/\___|_|  \__|_\__\__,_|_|   \_/ |_|_|_|_| ~
+
+Author:   Zachary Krepelka
+Date:     Friday, February 23rd, 2024
+
+Origin: https://github.com/zachary-krepelka/vertical-vim.git
+
+================================================================================
+
+TABLE OF CONTENTS 0                                 *vertical-vim-contents* {{{1
+
+1. Introduction   ....................................   |vertical-vim-intro|
+2. Usage   ...........................................   |vertical-vim-usage|
+3. Example   .........................................   |vertical-vim-examples|
+4. Remarks   .........................................   |vertical-vim-remarks|
+
+================================================================================
+
+INTRODUCTION      1                                    *vertical-vim-intro* {{{1
+
+TL;DR~
+
+This plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
+
+Background~
+
+The Vim text editor provides a set of commands called |motions|, so called
+because they move the cursor's position on the screen. More generally, motions
+act over text when provided with an |operator|, and they may be supplied with a
+|count| to repeat the action a specified number of times.
+
+A subset of these motions pertain to moving the cursor either left or right
+within the current line. Of these, I am specifically interested in the
+following. |f| |F| |t| |T| |;| |,|
+
+	- The |f|ind command takes a character and moves the cursor to the next
+	  occurrence of that character in the current line.  Its counterpart |F|
+	  takes a character and moves the cursor to previous occurrence of that
+	  character in the current line. >
+
+                before  fR
+                |
+                #
+                Quoth the Raven "Nevermore."
+                          #
+                          |
+                          after  fR
+<
+
+	- The |t|ill command takes a character and moves the cursor just before
+	  the next occurrence of that character in the current line.  Its
+	  counterpart |T| takes a character and moves the cursor just after the
+	  previous occurrence of that character in the current line. >
+
+		before  tR
+		|
+		#
+		Quoth the Raven "Nevermore."
+		         #
+			 |
+			 after  tR
+<
+
+	- The command |;| repeats latest |f|, |t|, |F| or |T|. Its counterpart
+	  command |,| applies |;| in the opposite direction. >
+
+		  start here                   fw
+		  |                            |
+		  #                            #
+		  Once upon a midnight dreary, while I pondered, weak and weary,
+		  						 #        #
+		  						 |        |
+		  						 ;        ;
+<
+	These commands let you flow through a line with ease once you have
+	established a target. They feel quite natural once you get into the
+	habit of using them.  Observe that |;| and |,| have a direction of flow
+	dependent upon the last issued |f|, |t|, |F|, or |T|.
+
+Plugin Functionality ~
+
+This plugin provides a variation of the commands previously discussed. By
+prefixing any of the aforementioned motions with a space, the motion will take
+effect in the current column as apposed to in the current line. In effect, this
+plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
+
+Maybe down the road, should the need arise, I'll program more vertical motions.
+
+================================================================================
+
+USAGE             2                                   *vertical-vim-usage* {{{{1
+
+This plugin provides six motions.  Operators and counts work as expected.
+
+<Space>f{char}
+
+			A motion that moves the cursor to the next occurrence of
+			{char} in the cursor's current column. The cursor will
+			move down the screen should a match exist.
+
+<Space>F{char}
+
+			A motion that moves the cursor to the previous
+			occurrence of {char} in the cursor's current column. The
+			cursor will move up the screen should a match exist.
+
+<Space>t{char}
+
+			A motion that moves the cursor just before the next
+			occurrence of {char} in the cursor's current column. The
+			cursor will move down the screen should a match exist.
+
+<Space>T{char}
+
+			A motion that moves the cursor just after the previous
+			occurrence of {char} in the cursor's current column. The
+			cursor will move up the screen should a match exist.
+
+<Space>;
+
+			Apply the latest of the four commands from above.
+
+<Space>,
+
+			Apply the above command in the reverse direction.
+
+================================================================================
+
+EXAMPLES          3                                 *vertical-vim-examples* {{{1
+
+The following exercises will give you a good feel for this plugin. Below is an
+ASCII art representation of a chess board. I will use this to demonstrate my
+plugin's functionality. You may want to copy it into a new buffer to practice
+with.  1) Place your cursor on the image and copy it with |yip|. 2) Open up a
+new window with |:vnew|. 3) Paste the image with |p|. >
+
+	   _______________
+	8 |_|#|_|#|_|#|_|#|
+	7 |#|_|#|_|#|_|#|_|
+	6 |_|#|_|#|_|#|_|#|
+	5 |#|_|#|_|#|_|#|_|
+	4 |_|#|_|#|_|#|_|#|
+	3 |#|_|#|_|#|_|#|_|
+	2 |_|#|_|#|_|#|_|#|
+	1 |#|_|#|_|#|_|#|_|
+	   a b c d e f g h
+
+Basic Movement~
+
+Move your cursor to cell A8. Place a mark for convenience.
+
+	* In vanilla Vim, you would type `f#` in normal mode to move to cell B8.
+
+	* Instead, type `<Space>f#` in normal mode to move to cell A7.
+
+Now move your cursor to cell H1.
+
+	* In vanilla Vim, you would type `F#` to move to cell G1.
+
+	* Instead, type `<Space>F#` to move to cell H2.
+
+The |<Space>t| and |<Space>T| commands are similar.
+
+Repeating Movements~
+
+Return to cell A8 and type `f#`.
+
+	* Repeated application of `;` will move you
+	  across the board from left to right.
+
+	* Repeated application of `,` will move you
+	  across the board from right to left.
+
+Return to cell A8 and type `<Space>f#`.
+
+	* Repeated application of `<Space>;` will move you down the board.
+
+	* Repeated application of `<Space>,` will move you up the board.
+
+Applying Counts~
+
+Return to cell A8.
+
+	* In vanilla Vim, you would type `4f#` to move to cell H8.
+
+	* Instead, type `4<Space>f#` to move to cell A1.
+
+Counts also work with `<Space>;` and `<Space>,`.
+
+Using Operators~
+
+All of the standard operators should work.  Return to cell A8 and try the
+following examples with different counts.  Undo is your friend.
+
+	* `y<Space>f{char}` to yank vertically.
+
+	* `c<Space>f{char}changed<Enter>` to change vertically.
+
+	* `d<Space>f{char}` to delete vertically.
+
+	* `v<Space>f{char}` to visually select vertically.
+
+================================================================================
+
+REMARKS           4                                  *vertical-vim-remarks* {{{1
+
+The chess board is courtesy of the ASCII Art Archive, found here.
+
+	https://www.asciiart.eu/sports-and-outdoors/chess.
+
+Here are some closely related plugins that I found on the internet.
+
+	https://github.com/inkarkat/vim-JumpToVerticalOccurrence
+	https://github.com/machakann/vim-columnmove
+
+I discovered these after the fact.
+They probably do it better.
+My plugin is modest.
+
+================================================================================
+vim:tw=80:ts=8:ft=help:fdm=marker
