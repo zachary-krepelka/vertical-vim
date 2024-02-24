@@ -14,7 +14,8 @@ in the documentation. Use your favorite plugin manager for installation.
 ## Motions
 
 This plugin's custom motions nicely parallel Vim's built-in motions.  They are
-counterparts to `f`, `F`, `t`, `T`, `;`, and `,`.
+vertical counterparts to `f`, `F`, `t`, `T`, `;`, and `,`. The following table
+gives a brief synopsis.
 
 | Horizontal | Vertical             |
 | :--------- | :------------------- |
