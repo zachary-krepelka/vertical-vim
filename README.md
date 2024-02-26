@@ -8,14 +8,10 @@
 
 # vertical.vim
 
-This plugin introduces motions for vertical movement.  Full details are provided
-in the documentation. Use your favorite plugin manager for installation.
-
-## Motions
-
-This plugin's custom motions nicely parallel Vim's built-in motions.  They are
-vertical counterparts to `f`, `F`, `t`, `T`, `;`, and `,`. The following table
-gives a brief synopsis.
+This plugin provides vertical counterparts to Vim's built-in motions `f`, `F`,
+`t`, `T`, `;`, and `,`.  The following table gives a brief synopsis.  Full
+details are provided in the documentation.  Use your favorite plugin manager for
+installation.
 
 | Horizontal | Vertical             |
 | :--------- | :------------------- |
