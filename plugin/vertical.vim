@@ -3,7 +3,7 @@
 " DATE: Thursday, February 22nd, 2024
 " ABOUT: Vertical motions for the Vim text editor
 " ORIGIN: https://github.com/zachary-krepelka/vertical-vim.git
-" UPDATED: Saturday, February 24th, 2024 at 1:10 AM
+" UPDATED: Monday, February 26th, 2024 at 4:12 AM
 
 " Variables  {{{1
 
@@ -52,22 +52,6 @@ function! s:find(target, clusivity, direction, visual, update)
 
 endfunction
 
-function! s:repeat(curr_direction)
-
-	let s:pivot = xor(s:prev_direction, a:curr_direction)
-
-	let s:prev_direction = a:curr_direction
-
-	let l:args = copy(s:save)
-
-	if a:curr_direction
-		let l:args[2] = !l:args[2]
-	endif
-
-	call call('s:find', l:args)
-
-endfunction
-
 function! s:match_in_cusor_column(char)
 
 	" This function returns a regular expression that matches the specified
@@ -96,6 +80,35 @@ function s:block(x1, y1, x2, y2)
 	let p2 = a:x2 .. 'G' .. a:y2 .. '|'
 
 	exe 'norm' l:p1 .. "\<C-Q>" .. l:p2
+
+endfunction
+
+function! s:repeat(curr_direction)
+
+	if empty(s:save)
+		call s:notify_misuse()
+		return
+	end
+
+	let s:pivot = xor(s:prev_direction, a:curr_direction)
+
+	let s:prev_direction = a:curr_direction
+
+	let l:args = copy(s:save)
+
+	if a:curr_direction
+		let l:args[2] = !l:args[2]
+	endif
+
+	call call('s:find', l:args)
+
+endfunction
+
+function! s:notify_misuse()
+
+	" This function plays an audible beep. See :help echoerr
+
+	exe "normal \<Esc>"
 
 endfunction
 
