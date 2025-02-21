@@ -31,7 +31,10 @@ INTRODUCTION      1                                    *vertical-vim-intro* {{{1
 
 1.1 OVERVIEW {{{2~
 
-This plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
+This plugin provides vertical counterparts to builtin |movement|s, currently
+|f|, |F|, |t|, |T|, |;|, and |,|.  They enable users to move their cursors
+vertically along the cursor's current column as apposed to horizontally along
+the cursor's current line.
 
 1.2 BACKGROUND {{{2~
 
@@ -230,10 +233,13 @@ following examples with different counts.  Undo is your friend.
 
 EXERCISE          4                                 *vertical-vim-exercise* {{{1
 
-Your challenge is to complete the box around the heart.  Your cursor begins in
-the upper left-hand corner of the box (on the plus sign).  Notice that there is
-no trailing whitespace after the heart.  Go ahead and `y`ank `i`nside the
-`p`aragraph so you can `p`ut this into a |:new| buffer. >
+Your challenge is to complete the box around the heart in the fewest keystrokes
+possible.  Your cursor begins in the upper left-hand corner of the box (on the
+plus sign).  Notice that there is no trailing whitespace after the heart.  Since
+Vim |help| files are displayed in read-only mode, go ahead and `y`ank `i`nside
+the following `p`aragraph so you can `p`ut it into a |:new| buffer where changes
+can be made.  Try to figure it out yourself.  Check your answer in the next
+section. >
 
                      +-----------------------------------
                      |
@@ -254,7 +260,7 @@ no trailing whitespace after the heart.  Go ahead and `y`ank `i`nside the
                      |
                      +-----------------------------------
 
-Try to figure it out yourself.  Check your answers in the next section.
+
 Bonus: delete the left-hand side of the square.
 
 ================================================================================
@@ -289,7 +295,7 @@ possible do to "90% of what plugins do with just Vim."  If I am to give a fair
 assessment, then I must also show a Vim-only solution.  Both solutions entail
 the same number of keystrokes.  The reader can decide which one feels more
 intuitive. >
->
+
 	*y<C-V>N$p
 
 1. With our cursor on the plus sign in the upper left-hand corner of the square,
@@ -451,5 +457,5 @@ else wrote an Emacs port too.
   * `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
 
 ================================================================================
-UPDATED: Friday, February 21st, 2025 at 2:01 AM
+UPDATED: Friday, February 21st, 2025 at 2:37 AM
 vim:tw=80:ts=8:ft=help:fdm=marker
