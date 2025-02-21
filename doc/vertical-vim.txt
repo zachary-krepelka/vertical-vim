@@ -413,11 +413,11 @@ I found some nearly identical Vim plugins on the internet.  I was not aware of
 these when writing my plugin and only discovered them after the fact.  Some do a
 much better job than I did.  My plugin is modest and probably full of bugs.
 
-	- https://github.com/inkarkat/vim-JumpToVerticalOccurrence
-	- https://github.com/machakann/vim-columnmove
-	- https://github.com/rbong/vim-vertical
-	- https://github.com/romgrk/columnMove.vim
-	- https://github.com/vim-utils/vim-vertical-move
+  * https://github.com/inkarkat/vim-JumpToVerticalOccurrence
+  * https://github.com/machakann/vim-columnmove
+  * https://github.com/rbong/vim-vertical
+  * https://github.com/romgrk/columnMove.vim
+  * https://github.com/vim-utils/vim-vertical-move
 
 After personally trying out each of these, I have come to the opinion that
 `vim-columnmove` by GitHub user "machakann" is the best one.  It does exactly
@@ -437,11 +437,9 @@ row.  I love this plugin so much that I ported it to ranger, a command-line file
 manager with a text-based user interface and Vim-inspired keybindings.  Someone
 else wrote an Emacs port too.
 
-	 - `vertigo.vim`: https://github.com/prendradjaja/vim-vertigo
-
-	 - `vertigo.el`: https://github.com/noctuid/vertigo.el
-
-	 - `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
+  * `vertigo.vim`: https://github.com/prendradjaja/vim-vertigo
+  * `vertigo.el`: https://github.com/noctuid/vertigo.el
+  * `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
 
 ================================================================================
 UPDATED: Thursday, February 20th, 2025 at 11:48 PM
