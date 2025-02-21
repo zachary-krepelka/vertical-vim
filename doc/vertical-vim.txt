@@ -29,11 +29,11 @@ TABLE OF CONTENTS 0                                 *vertical-vim-contents* {{{1
 
 INTRODUCTION      1                                    *vertical-vim-intro* {{{1
 
-TL;DR~
+1.1 OVERVIEW {{{2~
 
 This plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
 
-Background~
+1.2 BACKGROUND {{{2~
 
 The Vim text editor provides a set of commands called motions or |movement|s, so
 called because they move the cursor's position on the screen.  An |operator|
@@ -88,7 +88,7 @@ following.  |f| |F| |t| |T| |;| |,|
 	habit of using them.  Observe that |;| and |,| have a direction of flow
 	dependent upon the last issued |f|, |t|, |F|, or |T|.
 
-Plugin Functionality ~
+1.3 PLUGIN FUNCTIONALITY {{{2~
 
 This plugin provides a variation of the commands previously discussed.  By
 prefixing any of the aforementioned motions with a space, the motion will take
@@ -98,6 +98,8 @@ plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
 Maybe down the road, should the need arise, I'll program more vertical motions.
 In the future, I would like to implement vertical counterparts to other motions
 like the |word-motions| and the |left-right-motions|.
+
+}}}
 
 ================================================================================
 
@@ -167,7 +169,7 @@ new window with |:vnew|.  3) Paste the image with |p|. >
 	1 |#|_|#|_|#|_|#|_|
 	   a b c d e f g h
 
-Basic Movement~
+3.1 BASIC MOVEMENT {{{2~
 
 Move your cursor to cell A8.  Place a mark for convenience.
 
@@ -183,7 +185,7 @@ Now move your cursor to cell H1.
 
 The `<Space>t` and `<Space>T` commands are similar.
 
-Repeating Movements~
+3.2 REPEATING MOVEMENTS {{{2~
 
 Return to cell A8 and type `f#`.
 
@@ -199,7 +201,7 @@ Return to cell A8 and type `<Space>f#`.
 
 	* Repeated application of `<Space>,` will move you up the board.
 
-Applying Counts~
+3.3 APPLYING COUNTS {{{2~
 
 Return to cell A8.
 
@@ -209,7 +211,7 @@ Return to cell A8.
 
 Counts also work with `<Space>;` and `<Space>,`.
 
-Using Operators~
+3.4 USING OPERATORS {{{2~
 
 All of the standard operators should work.  Return to cell A8 and try the
 following examples with different counts.  Undo is your friend.
@@ -221,6 +223,8 @@ following examples with different counts.  Undo is your friend.
 	* `d<Space>f{char}` to delete vertically.
 
 	* `v<Space>f{char}` to visually select vertically.
+
+}}}
 
 ================================================================================
 
@@ -257,7 +261,7 @@ Bonus: delete the left-hand side of the square.
 
 SOLUTION          5                                 *vertical-vim-solution* {{{1
 
-5.1 USING THIS PLUGIN ~
+5.1 USING THIS PLUGIN {{{2~
 
 With your cursor on the upper left-hand corner of the box, type the following. >
 
@@ -278,7 +282,7 @@ Here's how it works.
 3. Once our cursor is in the upper right-hand corner of the square, we use the
    |p| operator to put the side of the square yanked in step one.
 
-5.2 USING VANILLA VIM ~
+5.2 USING VANILLA VIM {{{2~
 
 A plugin isn't always the solution.  Minimalists often insist that it is
 possible do to "90% of what plugins do with just Vim."  If I am to give a fair
@@ -400,7 +404,7 @@ The chess board is courtesy of the ASCII Art Archive, copy-and-pasted from here.
 
 RELATED           9                                  *vertical-vim-related* {{{1
 
-Reinventing the wheel ~
+9.1 REINVENTING THE WHEEL {{{2~
 
 I reinvented the wheel without even realizing!  It was worth it though because I
 had a heck of a lot of fun programming this plugin and documenting it.
@@ -423,7 +427,7 @@ functionality.  You should install machakann's plugin instead of mine!
 One is written by the legendary Igno Karkat, a Vim veteran whose name I often
 encounter during my journeys to https://vi.stackexchange.com.
 
-A better way to move vertically in Vim ~
+9.2 A BETTER WAY TO MOVE VERTICALLY IN VIM {{{2~
 
 One of my most beloved Vim plugins is `vertigo.vim` by GitHub user
 "prendradjaja."  It provides motions for moving up and down via `k` and `j`
