@@ -435,7 +435,7 @@ else wrote an Emacs port too.
 
 	 - `vertigo.vim`: https://github.com/prendradjaja/vim-vertigo
 
-	 - `vertigo.el`: https://github.com/noctuid/vertigo.elements
+	 - `vertigo.el`: https://github.com/noctuid/vertigo.el
 
 	 - `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
 
