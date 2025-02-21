@@ -260,7 +260,6 @@ section. >
                      |
                      +-----------------------------------
 
-
 Bonus: delete the left-hand side of the square.
 
 ================================================================================
@@ -349,8 +348,10 @@ This plugin works nice with this in your |vimrc|. >
 	set cursorline
 	set cursorcolumn
 
-This creates a crosshair centered on your cursor.  To make it follow your cursor
-around as you jump between windows, you can do something like this. >
+This creates a crosshair centered on your cursor.  The 'cursorcolumn' is of
+particular relevance because it helps the user identify targets for the motions
+provided by this plugin.  To make it follow your cursor around as you jump
+between windows, you can do something like this. >
 
 	augroup Focus
 
@@ -457,5 +458,5 @@ else wrote an Emacs port too.
   * `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
 
 ================================================================================
-UPDATED: Friday, February 21st, 2025 at 2:37 AM
+UPDATED: Friday, February 21st, 2025 at 3:05 AM
 vim:tw=80:ts=8:ft=help:fdm=marker
