@@ -286,44 +286,53 @@ Here's how it works.
 
 A plugin isn't always the solution.  Minimalists often insist that it is
 possible do to "90% of what plugins do with just Vim."  If I am to give a fair
-assessment, then I must also show a Vim-only solution. >
+assessment, then I must also show a Vim-only solution.  Both solutions entail
+the same number of keystrokes.  The reader can decide which one feels more
+intuitive. >
+>
+	*y<C-V>N$p
 
-	/+<Enter>y<C-V>N$p
+1. With our cursor on the plus sign in the upper left-hand corner of the square,
+   we move to the lower left-hand corner by typing `*`.  The |star| operator
+   moves the cursor to the next occurrence of the word under the cursor.  In
+   this circumstance, it actually grabs the whole inner line, but that will not
+   matter for us.  Not only have we moved the cursor, but we have also modified
+   the |last-pattern|.  This establishes a target for the |N| operator which
+   will be used in a later step.
 
-1. With our cursor on the plus sign in the upper-left hand corner, we search for
-   the next plus by typing `/+<Enter>`.  The cursor jumps to that location.  Our
-   aim is to make the plus sign the target of the |N| operator in a later step.
-   Note that the |star| operator will not work here since the dashes would also
-   be grabbed as part of the word under the cursor.
+2. With our cursor on the lower left-hand corner of the square, we type
+   `y<C-V>N`.  Here |y| is an |operator| and `<C-V>N` is a |forced-motion|.  By
+   default, the |N| motion is |characterwise|, but here we force it to be
+   blockwise.  This operator-motion combo enacts two effects.
 
-2. With our cursor on the lower left-hand corner, we type `y<C-V>N` to
-   vertically yank back to and including the previous plus sign.  As a side
-   effect, the cursor moves back to its original position.  The vertical
-   left-hand side of the square is now stored in the unnamed register as a
-   visual block.  In this circumstance, |y| is an operator and `<C-V>N` is a
-   |forced motion|.  By default, the |N| motion is |linewise|, but here we force
-   it to be blockwise.
+     a. The cursor moves to the previous occurrence of |last-pattern|, which for
+        us is our original cursor position -- the upper left-hand corner of the
+        square.
 
-3. Typing `$p` performs the same function as before.
+     b. The text moved over by the blockwise motion `<C-V>N` is stored in the
+        unnamed register as a |visual-block|.  In effect, we have vertically
+        yanked back to and including the previous plus sign, capturing the
+        left-hand side of the square.  It would not have worked had we only used
+        |N| by itself because the motion would have moved over the whole heart,
+        not just the edge of the box.
 
-This solution is flawed because it assumes that there are no other plus signs in
-between the apposing ends of the line segment that we yanked.  Try performing
-the same exercise again, but first type `vip:s/\./+/g<Enter>` with your cursor
-somewhere in the box.  Other variations are equally as bad. >
+3. Typing `$p` performs the same function as noted before.
 
-	/+<Enter><C-V>Ny$p
-	k/+<Enter>y<C-V>n$p
-	k/+<Enter><C-V>ny$p
-	y<C-V>17d$p
+Some variations of this solution are listed below. >
+
+	y<C-V>17j$p
 	<C-V>jjjjjjjjjjjjjjjjjy$p
+	/+<Enter><C-V>Ny$p
+	k/+<Enter><C-V>ny$p
 
 Some flaws with these are
 
-  - assumption of no intermediate matches
-  - requires counting or repeatedly pressing buttons
-  - unnecessary visuals
-  - verbosity of forced motions
-  - etc
+  * assumption of no intermediate matches
+  * requires counting or repeatedly pressing buttons
+  * unnecessary visuals / verbosity of forced motions
+  * etc
+
+}}}
 
 ================================================================================
 
@@ -442,5 +451,5 @@ else wrote an Emacs port too.
   * `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
 
 ================================================================================
-UPDATED: Thursday, February 20th, 2025 at 11:48 PM
+UPDATED: Friday, February 21st, 2025 at 2:01 AM
 vim:tw=80:ts=8:ft=help:fdm=marker
