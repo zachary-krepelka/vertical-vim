@@ -15,10 +15,15 @@ Origin: https://github.com/zachary-krepelka/vertical-vim.git
 
 TABLE OF CONTENTS 0                                 *vertical-vim-contents* {{{1
 
-1. Introduction   ....................................   |vertical-vim-intro|
-2. Usage   ...........................................   |vertical-vim-usage|
-3. Example   .........................................   |vertical-vim-examples|
-4. Remarks   .........................................   |vertical-vim-remarks|
+1. Introduction   ............................   |vertical-vim-intro|
+2. Usage   ...................................   |vertical-vim-usage|
+3. Example   .................................   |vertical-vim-examples|
+4. Exercise   ................................   |vertical-vim-exercise|
+5. Solution   ................................   |vertical-vim-solution|
+6. Tips   ....................................   |vertical-vim-tips|
+7. Bugs   ....................................   |vertical-vim-bugs|
+8. Acknowledgements   ........................   |vertical-vim-acknowledgements|
+9. Related    ................................   |vertical-vim-related|
 
 ================================================================================
 
@@ -30,10 +35,10 @@ This plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
 
 Background~
 
-The Vim text editor provides a set of commands called |motions|, so called
-because they move the cursor's position on the screen.  An |operator| applies an
-action to the text moved over by a motion.  Either may be given a |count| to
-enact their functionality a specified number of times.
+The Vim text editor provides a set of commands called motions or |movement|s, so
+called because they move the cursor's position on the screen.  An |operator|
+applies an action to the text moved over by a motion.  Either may be given a
+|count| to enact their functionality a specified number of times.
 
 A subset of these motions pertain to moving the cursor either left or right
 within the current line.  Of these, I am specifically interested in the
@@ -91,42 +96,52 @@ effect in the current column as apposed to the current line.  In effect, this
 plugin provides vertical counterparts to |f|, |F|, |t|, |T|, |;|, and |,|.
 
 Maybe down the road, should the need arise, I'll program more vertical motions.
+In the future, I would like to implement vertical counterparts to other motions
+like the |word-motions| and the |left-right-motions|.
 
 ================================================================================
 
-USAGE             2                                   *vertical-vim-usage* {{{{1
+USAGE             2                                    *vertical-vim-usage* {{{1
 
 This plugin provides six motions.  Operators and counts work as expected.
 
+								*vertical-vim-f*
 <Space>f{char}
 
-			A motion that moves the cursor to the next occurrence of
-			{char} in the cursor's current column.  The cursor will
-			move down the screen should a match exist.
-
-<Space>F{char}
-
-			A motion that moves the cursor to the previous
-			occurrence of {char} in the cursor's current column.
-			The cursor will move up the screen should a match exist.
-
-<Space>t{char}
-
-			A motion that moves the cursor just before the next
+			A blockwise motion that moves the cursor to the next
 			occurrence of {char} in the cursor's current column.
 			The cursor will move down the screen should a match
 			exist.
 
-<Space>T{char}
+								*vertical-vim-F*
+<Space>F{char}
 
-			A motion that moves the cursor just after the previous
+			A blockwise motion that moves the cursor to the previous
 			occurrence of {char} in the cursor's current column.
 			The cursor will move up the screen should a match exist.
 
+								*vertical-vim-t*
+<Space>t{char}
+
+			A blockwise motion that moves the cursor just before the
+			next occurrence of {char} in the cursor's current
+			column.  The cursor will move down the screen should a
+			match exist.
+
+								*vertical-vim-T*
+<Space>T{char}
+
+			A blockwise motion that moves the cursor just after the
+			previous occurrence of {char} in the cursor's current
+			column.  The cursor will move up the screen should a
+			match exist.
+
+								*vertical-vim-;*
 <Space>;
 
 			Apply the latest of the four commands from above.
 
+								*vertical-vim-,*
 <Space>,
 
 			Apply the above command in the reverse direction.
@@ -138,7 +153,7 @@ EXAMPLES          3                                 *vertical-vim-examples* {{{1
 The following exercises will give you a good feel for this plugin.  Below is an
 ASCII art representation of a chess board.  I will use this to demonstrate my
 plugin's functionality.  You may want to copy it into a new buffer to practice
-with.  1) Place your cursor on the image and copy it with |yip|.  2) Open up a
+with.  1) Place your cursor on the image and copy it with `yip`.  2) Open up a
 new window with |:vnew|.  3) Paste the image with |p|. >
 
 	   _______________
@@ -166,7 +181,7 @@ Now move your cursor to cell H1.
 
 	* Instead, type `<Space>F#` to move to cell H2.
 
-The |<Space>t| and |<Space>T| commands are similar.
+The `<Space>t` and `<Space>T` commands are similar.
 
 Repeating Movements~
 
@@ -209,20 +224,221 @@ following examples with different counts.  Undo is your friend.
 
 ================================================================================
 
-REMARKS           4                                  *vertical-vim-remarks* {{{1
+EXERCISE          4                                 *vertical-vim-exercise* {{{1
 
-The chess board is courtesy of the ASCII Art Archive, found here.
+Your challenge is to complete the box around the heart.  Your cursor begins in
+the upper left-hand corner of the box (on the plus sign).  Notice that there is
+no trailing whitespace after the heart.  Go ahead and `y`ank `i`nside the
+`p`aragraph so you can `p`ut this into a |:new| buffer. >
+
+                     +-----------------------------------
+                     |
+                     |        ......       ......
+                     |      ..........   ..........
+                     |    ............. .............
+                     |   .............................
+                     |   .............................
+                     |   .............................
+                     |    ...........................
+                     |      .......................
+                     |        ...................
+                     |           ...............
+                     |            ...........
+                     |              .......
+                     |                ...
+                     |                 .
+                     |
+                     +-----------------------------------
+
+Try to figure it out yourself.  Check your answers in the next section.
+Bonus: delete the left-hand side of the square.
+
+================================================================================
+
+SOLUTION          5                                 *vertical-vim-solution* {{{1
+
+5.1 USING THIS PLUGIN ~
+
+With your cursor on the upper left-hand corner of the box, type the following. >
+
+	y<Space>f+$p
+
+Here's how it works.
+
+1. With our cursor on the plus sign in the upper left-hand corner, we type
+   `y<Space>f+` to vertically yank up to and including the next plus sign in the
+   current cursor column.  The 'y' is an operator and '<Space>f+' is its motion.
+   The left-hand side of the square is now stored in the unnamed register as a
+   visual block.
+
+2. The cursor does not move after performing step one.  With our cursor in the
+   same position as before, we type the '$' motion to move to the upper
+   right-hand corner of the square.
+
+3. Once our cursor is in the upper right-hand corner of the square, we use the
+   |p| operator to put the side of the square yanked in step one.
+
+5.2 USING VANILLA VIM ~
+
+A plugin isn't always the solution.  Minimalists often insist that it is
+possible do to "90% of what plugins do with just Vim."  If I am to give a fair
+assessment, then I must also show a Vim-only solution. >
+
+	/+<Enter>y<C-V>N$p
+
+1. With our cursor on the plus sign in the upper-left hand corner, we search for
+   the next plus by typing `/+<Enter>`.  The cursor jumps to that location.  Our
+   aim is to make the plus sign the target of the |N| operator in a later step.
+   Note that the |star| operator will not work here since the dashes would also
+   be grabbed as part of the word under the cursor.
+
+2. With our cursor on the lower left-hand corner, we type `y<C-V>N` to
+   vertically yank back to and including the previous plus sign.  As a side
+   effect, the cursor moves back to its original position.  The vertical
+   left-hand side of the square is now stored in the unnamed register as a
+   visual block.  In this circumstance, |y| is an operator and `<C-V>N` is a
+   |forced motion|.  By default, the |N| motion is |linewise|, but here we force
+   it to be blockwise.
+
+3. Typing `$p` performs the same function as before.
+
+This solution is flawed because it assumes that there are no other plus signs in
+between the apposing ends of the line segment that we yanked.  Try performing
+the same exercise again, but first type `vip:s/\./+/g<Enter>` with your cursor
+somewhere in the box.  Other variations are equally as bad. >
+
+	/+<Enter><C-V>Ny$p
+	k/+<Enter>y<C-V>n$p
+	k/+<Enter><C-V>ny$p
+	y<C-V>17d$p
+	<C-V>jjjjjjjjjjjjjjjjjy$p
+
+Some flaws with these are
+
+  - assumption of no intermediate matches
+  - requires counting or repeatedly pressing buttons
+  - unnecessary visuals
+  - verbosity of forced motions
+  - etc
+
+================================================================================
+
+TIPS              6                                     *vertical-vim-tips* {{{1
+
+This plugin works nice with this in your |vimrc|. >
+
+	set cursorline
+	set cursorcolumn
+
+This creates a crosshair centered on your cursor.  To make it follow your cursor
+around as you jump between windows, you can do something like this. >
+
+	augroup Focus
+
+		" These commands are issued when the active window changes.
+
+		autocmd!
+
+		autocmd WinEnter * set cul
+		autocmd WinLeave * set nocuc
+
+		autocmd WinEnter * set cuc
+		autocmd WinLeave * set nocul
+
+	augroup END
+
+================================================================================
+
+BUGS              7                                     *vertical-vim-bugs* {{{1
+
+1. Forced motions do not work.  Here is an example. >
+
+	+-------+
+	|       |
+	|   t   |
+	|       |
+	+-------+
+<
+   With my cursor on the upper left-hand corner, I expect `yV<Space>f+` to yank
+   the entire box in a linewise manner.  In reality, the forced motion is
+   ignored and only the left-hand side of the square is yanked in a blockwise
+   manner. I would like to fix this if I can.  For the time being however, we
+   can accomplish the desired functionality indirectly.
+
+   a. To use vertical motions linewise, do this.
+
+	`v{vertical-motion}V<Operator>`
+
+	Example: `v<Space>f+Vy` yanks the entire box
+
+	Useful in situations when `yip`, `y}`, etc are ineffective.
+
+   b. To use vertical motions chacterwise, do this.
+
+        `v{vertical-motion}v<Operator>`
+
+	Example: `v2<Space>f|vfto0y`
+
+	This yanks the first half of the box including the target `t`.
+
+2. Problems can occur if a vertical motion is used when there is already other
+   text highlighted in |visual-mode|.
+
+================================================================================
+
+ACKNOWLEDGEMENTS  8                         *vertical-vim-acknowledgements* {{{1
+
+The ASCII art banner at the beginning of this file was generated with FIGlet.
+
+	https://en.wikipedia.org/wiki/FIGlet
+
+The chess board is courtesy of the ASCII Art Archive, copy-and-pasted from here.
 
 	https://www.asciiart.eu/sports-and-outdoors/chess.
 
-Here are some closely related plugins that I found on the internet.
+================================================================================
 
-	https://github.com/inkarkat/vim-JumpToVerticalOccurrence
-	https://github.com/machakann/vim-columnmove
+RELATED           9                                  *vertical-vim-related* {{{1
 
-I discovered these after the fact.
-They probably do it better.
-My plugin is modest.
+Reinventing the wheel ~
+
+I reinvented the wheel without even realizing!  It was worth it though because I
+had a heck of a lot of fun programming this plugin and documenting it.
+
+I found some nearly identical Vim plugins on the internet.  I was not aware of
+these when writing my plugin and only discovered them after the fact.  Some do a
+much better job than I did.  My plugin is modest and probably full of bugs.
+
+	- https://github.com/inkarkat/vim-JumpToVerticalOccurrence
+	- https://github.com/machakann/vim-columnmove
+	- https://github.com/rbong/vim-vertical
+	- https://github.com/romgrk/columnMove.vim
+	- https://github.com/vim-utils/vim-vertical-move
+
+After personally trying out each of these, I have come to the opinion that
+`vim-columnmove` by GitHub user "machakann" is the best one.  It does exactly
+what this plugin does, but it does a much better job and offers more
+functionality.  You should install machakann's plugin instead of mine!
+
+One is written by the legendary Igno Karkat, a Vim veteran whose name I often
+encounter during my journeys to https://vi.stackexchange.com.
+
+A better way to move vertically in Vim ~
+
+One of my most beloved Vim plugins is `vertigo.vim` by GitHub user
+"prendradjaja."  It provides motions for moving up and down via `k` and `j`
+using home row keypresses instead of numbers to specify the magnitude of the
+movement.  Any touch typist will understand the appeal of staying on the home
+row.  I love this plugin so much that I ported it to ranger, a command-line file
+manager with a text-based user interface and Vim-inspired keybindings.  Someone
+else wrote an Emacs port too.
+
+	 - `vertigo.vim`: https://github.com/prendradjaja/vim-vertigo
+
+	 - `vertigo.el`: https://github.com/noctuid/vertigo.elements
+
+	 - `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
 
 ================================================================================
+UPDATED: Thursday, February 20th, 2025 at 11:48 PM
 vim:tw=80:ts=8:ft=help:fdm=marker
