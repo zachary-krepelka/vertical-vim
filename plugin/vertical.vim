@@ -15,7 +15,7 @@ endif
 
 let g:loaded_vertical_vim = 1
 
-let s:leader = get(g:, 'vertical_vim_map_prefix', 'z')
+let s:leader = get(g:, 'vertical_vim_map_prefix', '<Space>')
 let s:pivot = 0
 let s:prev_direction = 0
 let s:save = []
