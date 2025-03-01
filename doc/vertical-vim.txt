@@ -411,13 +411,20 @@ CUSTOMIZATION     8                            *vertical-vim-customization* {{{1
 
 Customization is achieved by setting variables in your |.vimrc| file.
 
-*g:vertical_vim_map_prefix*	(default: <Space>)
+*g:vertical_meta_motion*	(default: <Space>%s)
 
+	Specifies the abstract form of a vertical motion.  The variable must
+	contain the substring `%s`.  This represents a generic, particular
+	built-in motion.
 
 	The motions provided by this plugin verbatimly parallel a subset of
 	Vim's built-in motions, and this is achieved by using a common prefix on
 	those built-in motions to reserve a separate namespace.  Users can
 	choose their own preferred prefix by altering this variable.
+
+	For example, to use the alt key, you can do this. >
+
+		let g:vertical_meta_motion = '<M-%s>'
 
 ================================================================================
 
@@ -477,5 +484,5 @@ else wrote an Emacs port too.
   * `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
 
 ================================================================================
-UPDATED: Friday, February 28th, 2025 at 11:57 PM
+UPDATED: Saturday, March 1st, 2025 at 1:30 AM
 vim:tw=80:ts=8:ft=help:fdm=marker

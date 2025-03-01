@@ -3,7 +3,7 @@
 " DATE: Thursday, February 22nd, 2024
 " ABOUT: Vertical motions for the Vim text editor
 " ORIGIN: https://github.com/zachary-krepelka/vertical-vim.git
-" UPDATED: Friday, February 28th, 2025 at 11:55 PM
+" UPDATED: Saturday, March 1st, 2025 at 1:30 AM
 
 " Variables  {{{1
 
@@ -15,7 +15,7 @@ endif
 
 let g:loaded_vertical_vim = 1
 
-let s:leader = get(g:, 'vertical_vim_map_prefix', '<Space>')
+let s:custom_motion = get(g:, 'vertical_meta_motion', '<Space>%s')
 let s:pivot = 0
 let s:prev_direction = 0
 let s:save = []
@@ -138,10 +138,12 @@ let s:map_data =
 \ }
 
 for [mode, motion_data] in items(s:map_data)
-	for [motion, spec] in items(motion_data)
-		exe mode .. "noremap <silent>" s:leader .. motion
-		\ ":<C-U>call call('<SID>find',[getcharstr()]+"
-		\ .. string(spec+[1]) .. ")<CR>"
+	for [builtin_motion, spec] in items(motion_data)
+		exe
+		\ mode .. "noremap <silent>"
+		\ printf(s:custom_motion, builtin_motion)
+		\ ":<C-U>call call('<SID>find', [getcharstr()] +"
+		\ string(spec+[1]) .. ")<CR>"
 	endfor
 endfor
 
