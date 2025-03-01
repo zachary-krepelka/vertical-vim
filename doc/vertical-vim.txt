@@ -15,15 +15,16 @@ Origin: https://github.com/zachary-krepelka/vertical-vim.git
 
 TABLE OF CONTENTS 0                                 *vertical-vim-contents* {{{1
 
-1. Introduction   ............................   |vertical-vim-intro|
-2. Usage   ...................................   |vertical-vim-usage|
-3. Example   .................................   |vertical-vim-examples|
-4. Exercise   ................................   |vertical-vim-exercise|
-5. Solution   ................................   |vertical-vim-solution|
-6. Tips   ....................................   |vertical-vim-tips|
-7. Bugs   ....................................   |vertical-vim-bugs|
-8. Acknowledgements   ........................   |vertical-vim-acknowledgements|
-9. Related    ................................   |vertical-vim-related|
+ 1. Introduction   ...........................   |vertical-vim-intro|
+ 2. Usage   ..................................   |vertical-vim-usage|
+ 3. Example   ................................   |vertical-vim-examples|
+ 4. Exercise   ...............................   |vertical-vim-exercise|
+ 5. Solution   ...............................   |vertical-vim-solution|
+ 6. Tips   ...................................   |vertical-vim-tips|
+ 7. Bugs   ...................................   |vertical-vim-bugs|
+ 8. Customization   ..........................   |vertical-vim-customization|
+ 9. Acknowledgements   .......................   |vertical-vim-acknowledgements|
+10. Related   ................................   |vertical-vim-related|
 
 ================================================================================
 
@@ -406,7 +407,21 @@ BUGS              7                                     *vertical-vim-bugs* {{{1
 
 ================================================================================
 
-ACKNOWLEDGEMENTS  8                         *vertical-vim-acknowledgements* {{{1
+CUSTOMIZATION     8                            *vertical-vim-customization* {{{1
+
+Customization is achieved by setting variables in your |.vimrc| file.
+
+*g:vertical_vim_map_prefix*	(default: <Space>)
+
+
+	The motions provided by this plugin verbatimly parallel a subset of
+	Vim's built-in motions, and this is achieved by using a common prefix on
+	those built-in motions to reserve a separate namespace.  Users can
+	choose their own preferred prefix by altering this variable.
+
+================================================================================
+
+ACKNOWLEDGEMENTS  9                         *vertical-vim-acknowledgements* {{{1
 
 The ASCII art banner at the beginning of this file was generated with FIGlet.
 
@@ -416,9 +431,13 @@ The chess board is courtesy of the ASCII Art Archive, copy-and-pasted from here.
 
 	https://www.asciiart.eu/sports-and-outdoors/chess.
 
+The ability to change the map prefix was suggested in a blog post by Steve Losh.
+
+	https://stevelosh.com/blog/2011/09/writing-vim-plugins/#s9-let-me-configure-mappings
+
 ================================================================================
 
-RELATED           9                                  *vertical-vim-related* {{{1
+RELATED           10                                 *vertical-vim-related* {{{1
 
 9.1 REINVENTING THE WHEEL {{{2~
 
@@ -458,5 +477,5 @@ else wrote an Emacs port too.
   * `plugin_vertigo.py`: https://github.com/zachary-krepelka/ranger-vertigo
 
 ================================================================================
-UPDATED: Friday, February 21st, 2025 at 3:05 AM
+UPDATED: Friday, February 28th, 2025 at 11:57 PM
 vim:tw=80:ts=8:ft=help:fdm=marker

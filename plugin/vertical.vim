@@ -3,7 +3,7 @@
 " DATE: Thursday, February 22nd, 2024
 " ABOUT: Vertical motions for the Vim text editor
 " ORIGIN: https://github.com/zachary-krepelka/vertical-vim.git
-" UPDATED: Monday, February 26th, 2024 at 4:12 AM
+" UPDATED: Friday, February 28th, 2025 at 11:55 PM
 
 " Variables  {{{1
 
@@ -15,6 +15,7 @@ endif
 
 let g:loaded_vertical_vim = 1
 
+let s:leader = get(g:, 'vertical_vim_map_prefix', 'z')
 let s:pivot = 0
 let s:prev_direction = 0
 let s:save = []
@@ -114,23 +115,38 @@ endfunction
 
 " Mappings {{{1
 
+let s:map_data =
+\ {
+\ 	'n': {
+\ 		'f' : [0, 0, 0],
+\ 		't' : [1, 0, 0],
+\ 		'F' : [0, 1, 0],
+\ 		'T' : [1, 1, 0]
+\ 	},
+\ 	'o': {
+\ 		'f' : [0, 0, 1],
+\ 		't' : [1, 0, 1],
+\ 		'F' : [0, 1, 1],
+\ 		'T' : [1, 1, 1]
+\ 	},
+\ 	'v': {
+\ 		'f' : [0, 0, 1],
+\ 		't' : [1, 0, 1],
+\ 		'F' : [0, 1, 1],
+\ 		'T' : [1, 1, 1]
+\ 	}
+\ }
+
+for [mode, motion_data] in items(s:map_data)
+	for [motion, spec] in items(motion_data)
+		exe mode .. "noremap <silent>" s:leader .. motion
+		\ ":<C-U>call call('<SID>find',[getcharstr()]+"
+		\ .. string(spec+[1]) .. ")<CR>"
+	endfor
+endfor
+
 noremap <silent> <Space>; :<C-U>call <SID>repeat(0)<CR>
 noremap <silent> <Space>, :<C-U>call <SID>repeat(1)<CR>
-
-nnoremap <silent> <Space>f :<C-U>call <SID>find(getcharstr(), 0, 0, 0, 1)<CR>
-nnoremap <silent> <Space>F :<C-U>call <SID>find(getcharstr(), 0, 1, 0, 1)<CR>
-nnoremap <silent> <Space>t :<C-U>call <SID>find(getcharstr(), 1, 0, 0, 1)<CR>
-nnoremap <silent> <Space>T :<C-U>call <SID>find(getcharstr(), 1, 1, 0, 1)<CR>
-
-onoremap <silent> <Space>f :<C-U>call <SID>find(getcharstr(), 0, 0, 1, 1)<CR>
-onoremap <silent> <Space>F :<C-U>call <SID>find(getcharstr(), 0, 1, 1, 1)<CR>
-onoremap <silent> <Space>t :<C-U>call <SID>find(getcharstr(), 1, 0, 1, 1)<CR>
-onoremap <silent> <Space>T :<C-U>call <SID>find(getcharstr(), 1, 1, 1, 1)<CR>
-
-vnoremap <silent> <Space>f :<C-U>call <SID>find(getcharstr(), 0, 0, 1, 1)<CR>
-vnoremap <silent> <Space>F :<C-U>call <SID>find(getcharstr(), 0, 1, 1, 1)<CR>
-vnoremap <silent> <Space>t :<C-U>call <SID>find(getcharstr(), 1, 0, 1, 1)<CR>
-vnoremap <silent> <Space>T :<C-U>call <SID>find(getcharstr(), 1, 1, 1, 1)<CR>
 
 " Menus {{{1
 
